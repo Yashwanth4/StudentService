@@ -22,7 +22,7 @@ class App extends Component {
         .json()
         .then(data => this.setState({students: data}))
     );
-    const r = 4;
+    const r = 4;  
   }
 
   render(){

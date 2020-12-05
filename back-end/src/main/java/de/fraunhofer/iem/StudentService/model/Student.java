@@ -9,7 +9,7 @@ public class Student {
 
     private final String firstName;
     private final String lastName;
-    private final Long matriculationNumber;
+    public final Long matriculationNumber;
     private final String address;
 
     public Student(String firstName, String lastName, Long matriculationNumber, String address) {
