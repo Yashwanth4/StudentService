@@ -37,6 +37,7 @@ class App extends Component {
           <td>{Student.firstName}</td>
           <td>{Student.lastName}</td>
           <td>{Student.matriculationNumber}</td>
+          <td>{Student.address}</td>
         </tr>
       );
     });
@@ -50,6 +51,7 @@ class App extends Component {
           <th>First Name</th>
           <th>Last Name</th>
           <th>Mtr. Number</th>
+          <th>address</th>
         </tr>
       </thead>
       <tbody>{StudentList}</tbody>
