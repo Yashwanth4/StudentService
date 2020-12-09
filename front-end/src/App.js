@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import { Container, Table } from "reactstrap";
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import update from "./update";
 
 
 class App extends Component {
 
   constructor(props){
+
     super(props);
     this.state = {students: []};
+    this.editStudent = this.editStudent.bind(this);
   }
 
   componentDidMount(){
@@ -20,9 +24,16 @@ class App extends Component {
      }).then(response =>
       response
         .json()
-        .then(data => this.setState({students: data}))
+        .then(data => this.setState({students: data,current:0}))
     );
     const r = 4;  
+  }
+
+  editStudent(Student) {
+
+  const index = this.state.Students.findIndex(Student);
+  this.setState({...this.state,current:index})
+  this.props.history.push('/update');  
   }
 
   render(){
@@ -38,11 +49,13 @@ class App extends Component {
           <td>{Student.lastName}</td>
           <td>{Student.matriculationNumber}</td>
           <td>{Student.address}</td>
+          <button onClick={ () => this.editStudent(Student)} className="btn btn-info">Update </button>
         </tr>
       );
     });
 
     return (
+      <Router>    
       <div>
         <Container fluid>
         <Table>
@@ -57,7 +70,13 @@ class App extends Component {
       <tbody>{StudentList}</tbody>
     </Table>
         </Container>
-      </div>
+  </div>
+  <Switch>
+    <Route path = "/update">
+      <update  firstN ={this.state.students[this.state.current].firstName} lastN = {this.state.students[this.state.current].lastName} mn = {this.state.students[this.state.current].matriculationNumber} ads = {this.state.students[this.state.current].address}  > </update>
+    </Route>
+  </Switch>
+  </Router>
     );
   }
 }
